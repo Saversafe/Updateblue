@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Period Number & Result</title>
+    <style>
+        /* Background Styles */
+        body {
+            background: url('https://firebasestorage.googleapis.com/v0/b/sanu-562b0.appspot.com/o/Picsart_25-02-16_17-44-52-034.jpg?alt=media&token=cf56de4d-0567-4d06-99e6-1c5f349747ae') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Neon Blue Title */
+        h1 {
+            color: #f44235;
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #f44235, 0 0 20px #f44235, 0 0 30px Red;
+            z-index: 10;
+        }
+
+        /* Hidden Content */
+        #mainContent {
+            display: none;
+        }
+
+        /* Password Container */
+        #passwordContainer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px black;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background: #00FFFF;
+            color: Red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0008080;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px black;
+            z-index: 10;
+        }
+
+        h2, p {
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .big { color: green; }
+        .small { color: red; }
+    </style>
+</head>
+<body>
+
+    <!-- Password Input Section -->
+    <div id="passwordContainer">
+        <h1>Enter key </h1>
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <br>
+        <button onclick="checkPassword()">Login </button>
+        <p id="errorMessage" style="color: red; display: none;">invalid Key !</p>
+    </div>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock - JavaScript</title>
+
+    <!--css file-->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box">
+        <span class="num hour">12</span>
+        <span class="txt">Hours</span>
+      </div>
+      <div class="box">
+        <span class="num min">34</span>
+        <span class="txt">Minutes</span>
+      </div>
+      <div class="box">
+        <span class="num sec">00</span>
+        <span class="txt">Seconds</span>
+      </div>
+      <div class="box">
+        <span class="num ampm">PM</span>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+    <!-- Main Content (Hidden by Default) -->
+    <div id="mainContent">
+        <h1>ᯓ 𝗦𝗥 ≽ 𝗔𝗻𝗱𝗿☻𝗶𝗱 ᯓ</h1>
+
+        <div class="container">
+            <h2>Period Number</h2>
+            <p id="periodNumber">Loading...</p>
+
+            <h2>Timer</h2>
+            <p id="timer">00:00</p>
+
+            <h2>Result</h2>
+            <p id="result">Calculating...</p>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            if (password === "SR-ANDROID") {
+                document.getElementById("passwordContainer").style.display = "none";
+                document.getElementById("mainContent").style.display = "block";
+            } else {
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+
+        function updatePeriodAndTimer() {
+            let now = new Date();
+            let year = now.getUTCFullYear();
+            let month = String(now.getUTCMonth() + 1).padStart(2, '0');
+            let day = String(now.getUTCDate()).padStart(2, '0');
+            let hours = now.getUTCHours();
+            let minutes = now.getUTCMinutes();
+            let totalMinutes = hours * 60 + minutes;
+
+            let periodNumber = `${year}${month}${day}1000${10001 + totalMinutes}`;
+            document.getElementById("periodNumber").innerText = periodNumber;
+
+            let lastTwoDigits = periodNumber.slice(-2);
+            let sum = [...lastTwoDigits].reduce((a, b) => a + parseInt(b), 0);
+            
+            if (sum > 9) {
+                sum = [...String(sum)].reduce((a, b) => a + parseInt(b), 0);
+            }
+
+            let resultText = sum >= 5 ? "BIG" : "SMALL";
+            document.getElementById("result").innerHTML = `<span class="${sum >= 5 ? 'big' : 'small'}">${resultText}</span>`;
+
+            let seconds = now.getUTCSeconds();
+            let remainingSeconds = 60 - seconds;
+            document.getElementById("timer").innerText = `00:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        setInterval(updatePeriodAndTimer, 1000);
+        updatePeriodAndTimer();
+    </script>
+
+</body>
+</html>
